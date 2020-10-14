@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>闭包</title>
+  <style>
+    ul {
+      border: 1px solid blue;
+      overflow: hidden;
+      padding-left: 0;
+    }
+
+    ul li {
+      list-style: none;
+      border: 1px solid red;
+      width: 100px;
+      height: 100px;
+      float: left;
+      margin: 10px;
+    }
+  </style>
+  <script>
+    window.onload = function () {
+      var lis = document.getElementsByTagName('li');
+      // 循环给li绑定点击事件
+      //for (var i = 0; i < lis.length; i++) {
+      // lis[i]  每一个li元素,需要关注fun执行的时候i的值
+      //闭包，每次都弹出5
+      /* lis[i].onclick = function () {
+        alert(i + 1);  //5
+      } */
+      //解决闭包  声明一个立即执行函数，将i传递进去，在立即执行函数内返回一个函数，返回的函数是事件处理函数
+      /* lis[i].onclick = (function (num) {
+        return function () {
+          alert(num + 1);
+        }
+      })(i); */
+      //}
+      //实现功能的另外一种方式，没有闭包
+      var lisArr = Array.prototype.slice.call(lis, 0);
+      lisArr.forEach(function (item, index) {
+        item.onclick = function () {
+          alert(index + 1);
+        }
+      });
+    }
+  </script>
+</head>
+
+<body>
+  <ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+</body>
+
+</html>
